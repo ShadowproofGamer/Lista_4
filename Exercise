@@ -1,0 +1,21 @@
+Zmierz się z problemem identyfikacji zapotrzebowania ze świata planowania zapotrzebowania na koszulki o danych parametrach. W tym celu wykorzystaj załączony t-shirts.csv.
+Wewnątrz pliku znajduje się 20 tysięcy pozycji oznaczaczonych następującymi parametrami:
+• rozmiar (XS, S, M, L, XL, XXL, 3XL)
+• materiał (nylon, polyester, silk, cotton, linen)
+• kolor (white, cream, blue, black, orange, green, yellow, red, violet, navy)
+• rękawy (short, long)
+• zapotrzebowanie (low, medium, high)
+Zadania powinny być wykonane z pomocą Pythona i/lub WEKI. Punktacja:
+1. eksploracja danych – przedstaw podstawowe dane statystyczne i uwagi dotyczące cech i etykiet
+zbioru danych. (10 punktów)
+2. przygotowanie danych – podziel dane na zestaw uczący i walidacyjny (alternatywnie użyj walidacji krzyżowej), zbadaj wpływ różnego typu przetworzenia danych na wyniki klasyfikacji (proponowane: normalizacja, standaryzacja, dyskretyzacja, selekcja cech, PCA) - czyli wykonaj porównanie wyników bez przetworzenia danych z rezultatami po ich przetworzeniu, wykorzystując
+co najmniej 2 metody różnego typu (osobno). (30 punktów)
+4
+Bonus – usuń 5% wartości cech i przygotuj dane stosując metody radzenia sobie z brakującymi
+danymi. (5 punktów)
+3. klasyfikacja – przetestuj klasyfikatory i zbadaj wpływ na wyniki: naiwny klasyfikator Bayesa oraz
+drzewo decyzjne używając przynajmniej 3 różnych zestawów hiperparametrów. (40 punktów)
+Bonus – Przetestuj (ze zrozumieniem!) bardziej zaawansowane algorytmy, takie jak Las losowy
+czy Klasyfikator wektorów nośnych (SVM, z ang. Support Vector Machines). (5 punktów)
+4. ocena klasyfikacji – do porównania wyników różnego typu przygotowania danych oraz wykorzystanego klasyfikatora użyj poznanych metryk oceny klasyfikacji i zinterpretuj wyniki. (20
+punktów)
