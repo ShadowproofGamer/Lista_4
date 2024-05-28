@@ -41,7 +41,7 @@ def standardize_data(X):
     return scaler.fit_transform(X)
 
 def discretize_data(X):
-    discretizer = KBinsDiscretizer(n_bins=10, encode='ordinal', strategy='uniform')
+    discretizer = KBinsDiscretizer(n_bins=10, encode='ordinal', strategy='uniform', subsample=None)
     return discretizer.fit_transform(X)
 
 def pca_data(X, n_components=2):
@@ -52,6 +52,9 @@ def select_features(X, y, k=2):
     selector = SelectKBest(f_classif, k=k)
     X_new = selector.fit_transform(X, y)
     return X_new, selector
+
+def no_transform(X):
+    return X
 
 # Evaluate the impact of data preprocessing on classification performance
 def evaluate_preprocessing(X_train, X_val, y_train, y_val, preprocessing_func, classifier, **kwargs):
@@ -86,9 +89,12 @@ preprocessing_methods = [
     normalize_data,
     standardize_data,
     discretize_data,
-    pca_data
+    pca_data,
+    no_transform
 ]
 
 for preprocessing_method in preprocessing_methods:
     evaluate_preprocessing(X_train, X_val, y_train, y_val, preprocessing_method, DecisionTreeClassifier())
     evaluate_preprocessing(X_train, X_val, y_train, y_val, preprocessing_method, GaussianNB())
+
+
