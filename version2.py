@@ -226,3 +226,30 @@ for metric in metrics:
     plt.tight_layout(rect=[0.0, 0.0, 1, 1.0])
     # plt.legend()
     plt.show()
+
+
+
+
+
+
+
+
+
+# Plotting specific classifier + param combo
+for classifier in classifiers:
+    for param in results_df[results_df['classifier'] == classifier]['params'].unique():
+        # Filter results for the specific classifier and parameters
+        specific_results_df = results_df[(results_df['classifier'] == classifier) & (results_df['params'] == param)]
+
+        plt.figure(figsize=(14, 8))
+
+        for preprocessing_method in specific_results_df['preprocessing'].unique():
+            metric_values = specific_results_df[specific_results_df['preprocessing'] == preprocessing_method][metrics].values.flatten()
+            plt.plot(metrics, metric_values, marker='o', label=f"{preprocessing_method}")
+
+        plt.title(f'Performance Metrics for {classifier} with params: {param}')
+        plt.xlabel('Metric')
+        plt.ylabel('Value')
+        plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+        plt.tight_layout(rect=[0.0, 0.0, 1, 1.0])
+        plt.show()
