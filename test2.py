@@ -146,6 +146,27 @@ naive_bayes_params = [
     {'var_smoothing': 1e-3}
 ]
 
+# Function to plot confusion matrix as a heatmap
+def plot_multiple_confusion_matrices_heatmap(confusion_matrices, titles):
+    n = len(confusion_matrices)
+    cols = 3
+    rows = (n // cols) + (n % cols > 0)
+
+    plt.figure(figsize=(5 * cols, 5 * rows))
+
+    for i, (confusion_matrix, title) in enumerate(zip(confusion_matrices, titles)):
+        plt.subplot(rows, cols, i + 1)
+        sns.heatmap(confusion_matrix, annot=True, fmt='d', cmap='Blues')
+        plt.title(f'Confusion Matrix - {title}')
+        plt.xlabel('Predicted')
+        plt.ylabel('Actual')
+
+    plt.tight_layout()
+    plt.show()
+
+confusion_matrices = []
+titles = []
+
 
 # Evaluate the impact of data preprocessing on classification performance
 def evaluate_preprocessing(X_train, X_val, y_train, y_val, preprocessing_func, classifier, params, **kwargs):
@@ -166,6 +187,9 @@ def evaluate_preprocessing(X_train, X_val, y_train, y_val, preprocessing_func, c
     recall = recall_score(y_val, y_pred, average='macro', zero_division=0)
     f1 = f1_score(y_val, y_pred, average='macro', zero_division=0)
     confusion_mat = confusion_matrix(y_val, y_pred)
+    if preprocessing_func == standardize_data:
+        confusion_matrices.append(confusion_mat)
+        titles.append(f"{classifier.__class__.__name__}\n{params}")
 
     print(f"Preprocessing: {preprocessing_func.__name__}")
     print(f"Classifier: {classifier.__class__.__name__}")
@@ -254,3 +278,5 @@ for classifier in classifiers:
         plt.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
         plt.tight_layout(rect=[0.0, 0.0, 1, 1.0])
         plt.show()
+
+plot_multiple_confusion_matrices_heatmap(confusion_matrices, titles)
